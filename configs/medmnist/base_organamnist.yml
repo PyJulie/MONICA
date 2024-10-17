@@ -1,0 +1,21 @@
+general: 
+  dataset_name: organamnist
+  num_classes: 11
+datasets:
+  imbalance_ratio: 10
+  head: 3
+  medium: 6
+  tail: 11
+  img_path: '/mnt/sda/julie/datasets/medmnist/images/organamnist_224/'
+  train:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_train.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_dic.npy'
+  val:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_val.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_dic.npy'
+  test:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_test.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/organamnist_dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'normal'

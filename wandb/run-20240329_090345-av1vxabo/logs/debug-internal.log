@@ -1,0 +1,187 @@
+2024-03-29 09:03:45,753 INFO    StreamThr :23784 [internal.py:wandb_internal():86] W&B internal server running at pid: 23784, started at: 2024-03-29 09:03:45.751564
+2024-03-29 09:03:45,756 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: status
+2024-03-29 09:03:45,760 INFO    WriterThread:23784 [datastore.py:open_for_write():87] open: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\run-av1vxabo.wandb
+2024-03-29 09:03:45,762 DEBUG   SenderThread:23784 [sender.py:send():379] send: header
+2024-03-29 09:03:45,762 DEBUG   SenderThread:23784 [sender.py:send():379] send: run
+2024-03-29 09:03:46,270 INFO    SenderThread:23784 [dir_watcher.py:__init__():211] watching files in: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files
+2024-03-29 09:03:46,270 INFO    SenderThread:23784 [sender.py:_start_run_threads():1124] run started: av1vxabo with start time 1711703025.756547
+2024-03-29 09:03:46,275 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: check_version
+2024-03-29 09:03:46,275 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: check_version
+2024-03-29 09:03:46,540 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: run_start
+2024-03-29 09:03:46,564 DEBUG   HandlerThread:23784 [system_info.py:__init__():26] System info init
+2024-03-29 09:03:46,564 DEBUG   HandlerThread:23784 [system_info.py:__init__():41] System info init done
+2024-03-29 09:03:46,564 INFO    HandlerThread:23784 [system_monitor.py:start():194] Starting system monitor
+2024-03-29 09:03:46,564 INFO    SystemMonitor:23784 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-29 09:03:46,565 INFO    HandlerThread:23784 [system_monitor.py:probe():214] Collecting system info
+2024-03-29 09:03:46,568 INFO    SystemMonitor:23784 [interfaces.py:start():190] Started cpu monitoring
+2024-03-29 09:03:46,569 INFO    SystemMonitor:23784 [interfaces.py:start():190] Started disk monitoring
+2024-03-29 09:03:46,570 INFO    SystemMonitor:23784 [interfaces.py:start():190] Started gpu monitoring
+2024-03-29 09:03:46,570 INFO    SystemMonitor:23784 [interfaces.py:start():190] Started memory monitoring
+2024-03-29 09:03:46,577 INFO    SystemMonitor:23784 [interfaces.py:start():190] Started network monitoring
+2024-03-29 09:03:46,577 DEBUG   HandlerThread:23784 [system_info.py:probe():150] Probing system
+2024-03-29 09:03:46,578 DEBUG   HandlerThread:23784 [gitlib.py:_init_repo():56] git repository is invalid
+2024-03-29 09:03:46,579 DEBUG   HandlerThread:23784 [system_info.py:probe():198] Probing system done
+2024-03-29 09:03:46,579 DEBUG   HandlerThread:23784 [system_monitor.py:probe():223] {'os': 'Windows-10-10.0.19045-SP0', 'python': '3.11.7', 'heartbeatAt': '2024-03-29T09:03:46.577986', 'startedAt': '2024-03-29T09:03:45.747578', 'docker': None, 'cuda': None, 'args': ('--config', 'configs/isic/isic_RW.yml'), 'state': 'running', 'program': 'D:\\research\\projects\\OpenMedLongTailed\\main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'host': 'DESKTOP-I77DD26', 'username': 'julie', 'executable': 'C:\\Users\\julie\\anaconda3\\python.exe', 'cpu_count': 10, 'cpu_count_logical': 16, 'cpu_freq': {'current': 3700.0, 'min': 0.0, 'max': 3700.0}, 'cpu_freq_per_core': [{'current': 3700.0, 'min': 0.0, 'max': 3700.0}], 'disk': {'/': {'total': 907.7285118103027, 'used': 661.7744331359863}}, 'gpu': 'NVIDIA GeForce RTX 4070 SUPER', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4070 SUPER', 'memory_total': 12878610432}], 'memory': {'total': 15.845497131347656}}
+2024-03-29 09:03:46,579 INFO    HandlerThread:23784 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-29 09:03:46,579 INFO    HandlerThread:23784 [system_monitor.py:probe():227] Publishing system info
+2024-03-29 09:03:46,579 DEBUG   HandlerThread:23784 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-03-29 09:03:47,283 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_created():271] file/dir created: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\conda-environment.yaml
+2024-03-29 09:03:54,726 DEBUG   HandlerThread:23784 [system_info.py:_save_conda():222] Saving conda packages done
+2024-03-29 09:03:54,727 INFO    HandlerThread:23784 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-29 09:03:54,739 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: status_report
+2024-03-29 09:03:54,739 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: keepalive
+2024-03-29 09:03:54,740 DEBUG   SenderThread:23784 [sender.py:send():379] send: files
+2024-03-29 09:03:54,740 INFO    SenderThread:23784 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-03-29 09:03:55,242 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: python_packages
+2024-03-29 09:03:55,242 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: python_packages
+2024-03-29 09:03:55,243 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-29 09:03:55,243 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: stop_status
+2024-03-29 09:03:55,244 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-29 09:03:55,348 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\conda-environment.yaml
+2024-03-29 09:03:55,348 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_created():271] file/dir created: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\requirements.txt
+2024-03-29 09:03:55,348 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_created():271] file/dir created: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\wandb-metadata.json
+2024-03-29 09:03:55,422 INFO    wandb-upload_0:23784 [upload_job.py:push():131] Uploaded file C:\Users\julie\AppData\Local\Temp\tmp8hx66v06wandb\o72won0o-wandb-metadata.json
+2024-03-29 09:03:55,457 DEBUG   SenderThread:23784 [sender.py:send():379] send: telemetry
+2024-03-29 09:03:56,356 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_created():271] file/dir created: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\output.log
+2024-03-29 09:03:57,042 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: status_report
+2024-03-29 09:03:57,681 DEBUG   SenderThread:23784 [sender.py:send():379] send: exit
+2024-03-29 09:03:57,681 INFO    SenderThread:23784 [sender.py:send_exit():586] handling exit code: 1
+2024-03-29 09:03:57,681 INFO    SenderThread:23784 [sender.py:send_exit():588] handling runtime: 11
+2024-03-29 09:03:57,683 INFO    SenderThread:23784 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-29 09:03:57,684 INFO    SenderThread:23784 [sender.py:send_exit():594] send defer
+2024-03-29 09:03:57,684 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,684 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 0
+2024-03-29 09:03:57,684 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,684 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-03-29 09:03:57,684 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 1
+2024-03-29 09:03:57,684 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,684 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 1
+2024-03-29 09:03:57,684 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,684 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-03-29 09:03:57,684 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 2
+2024-03-29 09:03:57,684 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,685 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 2
+2024-03-29 09:03:57,685 INFO    HandlerThread:23784 [system_monitor.py:finish():203] Stopping system monitor
+2024-03-29 09:03:57,685 INFO    HandlerThread:23784 [interfaces.py:finish():202] Joined cpu monitor
+2024-03-29 09:03:57,686 INFO    HandlerThread:23784 [interfaces.py:finish():202] Joined disk monitor
+2024-03-29 09:03:57,686 DEBUG   SystemMonitor:23784 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-29 09:03:57,691 DEBUG   SystemMonitor:23784 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-03-29 09:03:57,691 DEBUG   SystemMonitor:23784 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-03-29 09:03:57,730 INFO    HandlerThread:23784 [interfaces.py:finish():202] Joined gpu monitor
+2024-03-29 09:03:57,730 INFO    HandlerThread:23784 [interfaces.py:finish():202] Joined memory monitor
+2024-03-29 09:03:57,730 INFO    HandlerThread:23784 [interfaces.py:finish():202] Joined network monitor
+2024-03-29 09:03:57,731 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 3
+2024-03-29 09:03:57,731 DEBUG   SenderThread:23784 [sender.py:send():379] send: stats
+2024-03-29 09:03:57,731 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,731 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 3
+2024-03-29 09:03:57,731 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 4
+2024-03-29 09:03:57,731 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,731 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 4
+2024-03-29 09:03:57,731 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-03-29 09:03:57,731 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 5
+2024-03-29 09:03:57,731 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,731 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 5
+2024-03-29 09:03:57,732 DEBUG   SenderThread:23784 [sender.py:send():379] send: summary
+2024-03-29 09:03:57,732 INFO    SenderThread:23784 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-29 09:03:57,732 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,732 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-03-29 09:03:57,732 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 6
+2024-03-29 09:03:57,732 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,732 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 6
+2024-03-29 09:03:57,732 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,732 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-03-29 09:03:57,734 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: status_report
+2024-03-29 09:03:57,881 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 7
+2024-03-29 09:03:57,881 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:03:57,881 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 7
+2024-03-29 09:03:57,882 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:03:57,882 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-03-29 09:03:58,368 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\config.yaml
+2024-03-29 09:03:58,369 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\output.log
+2024-03-29 09:03:58,369 INFO    Thread-16 :23784 [dir_watcher.py:_on_file_created():271] file/dir created: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\wandb-summary.json
+2024-03-29 09:03:58,682 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-29 09:04:00,041 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 8
+2024-03-29 09:04:00,042 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: poll_exit
+2024-03-29 09:04:00,043 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:00,043 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 8
+2024-03-29 09:04:00,044 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:00,044 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-03-29 09:04:00,044 INFO    SenderThread:23784 [job_builder.py:build():318] Attempting to build job artifact
+2024-03-29 09:04:00,045 INFO    SenderThread:23784 [job_builder.py:_get_source_type():466] no source found
+2024-03-29 09:04:00,046 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 9
+2024-03-29 09:04:00,046 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:00,046 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 9
+2024-03-29 09:04:00,047 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:00,047 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-03-29 09:04:00,047 INFO    SenderThread:23784 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-03-29 09:04:00,392 INFO    SenderThread:23784 [dir_watcher.py:_on_file_modified():288] file/dir modified: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\output.log
+2024-03-29 09:04:00,393 INFO    SenderThread:23784 [dir_watcher.py:finish():388] scan: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files
+2024-03-29 09:04:00,394 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\conda-environment.yaml conda-environment.yaml
+2024-03-29 09:04:00,395 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\config.yaml config.yaml
+2024-03-29 09:04:00,400 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\output.log output.log
+2024-03-29 09:04:00,407 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\requirements.txt requirements.txt
+2024-03-29 09:04:00,412 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\wandb-metadata.json wandb-metadata.json
+2024-03-29 09:04:00,412 INFO    SenderThread:23784 [dir_watcher.py:finish():402] scan save: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\wandb-summary.json wandb-summary.json
+2024-03-29 09:04:00,414 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 10
+2024-03-29 09:04:00,416 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:00,416 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 10
+2024-03-29 09:04:00,419 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:00,420 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-03-29 09:04:00,420 INFO    SenderThread:23784 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-29 09:04:00,693 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-29 09:04:00,694 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: poll_exit
+2024-03-29 09:04:00,773 INFO    wandb-upload_0:23784 [upload_job.py:push():131] Uploaded file D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\conda-environment.yaml
+2024-03-29 09:04:01,268 INFO    wandb-upload_4:23784 [upload_job.py:push():131] Uploaded file D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\wandb-summary.json
+2024-03-29 09:04:01,708 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-29 09:04:01,709 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: poll_exit
+2024-03-29 09:04:01,721 INFO    wandb-upload_2:23784 [upload_job.py:push():131] Uploaded file D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\output.log
+2024-03-29 09:04:01,735 INFO    wandb-upload_3:23784 [upload_job.py:push():131] Uploaded file D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\requirements.txt
+2024-03-29 09:04:01,745 INFO    wandb-upload_1:23784 [upload_job.py:push():131] Uploaded file D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\files\config.yaml
+2024-03-29 09:04:01,957 INFO    Thread-15 (_thread_body):23784 [sender.py:transition_state():614] send defer: 11
+2024-03-29 09:04:01,958 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:01,959 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 11
+2024-03-29 09:04:01,959 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:01,960 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-03-29 09:04:01,960 INFO    SenderThread:23784 [file_pusher.py:join():178] waiting for file pusher
+2024-03-29 09:04:01,961 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 12
+2024-03-29 09:04:01,961 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:01,961 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 12
+2024-03-29 09:04:01,962 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:01,962 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-03-29 09:04:01,962 INFO    SenderThread:23784 [file_stream.py:finish():614] file stream finish called
+2024-03-29 09:04:02,086 INFO    SenderThread:23784 [file_stream.py:finish():618] file stream finish is done
+2024-03-29 09:04:02,086 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 13
+2024-03-29 09:04:02,087 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:02,087 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 13
+2024-03-29 09:04:02,087 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:02,087 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-03-29 09:04:02,088 INFO    SenderThread:23784 [sender.py:transition_state():614] send defer: 14
+2024-03-29 09:04:02,088 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: defer
+2024-03-29 09:04:02,089 DEBUG   SenderThread:23784 [sender.py:send():379] send: final
+2024-03-29 09:04:02,089 INFO    HandlerThread:23784 [handler.py:handle_request_defer():172] handle defer: 14
+2024-03-29 09:04:02,089 DEBUG   SenderThread:23784 [sender.py:send():379] send: footer
+2024-03-29 09:04:02,090 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: defer
+2024-03-29 09:04:02,090 INFO    SenderThread:23784 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-03-29 09:04:02,091 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-29 09:04:02,092 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-29 09:04:02,092 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: server_info
+2024-03-29 09:04:02,092 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: poll_exit
+2024-03-29 09:04:02,093 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: get_summary
+2024-03-29 09:04:02,093 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: poll_exit
+2024-03-29 09:04:02,094 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: sampled_history
+2024-03-29 09:04:02,094 DEBUG   SenderThread:23784 [sender.py:send_request():406] send_request: server_info
+2024-03-29 09:04:02,094 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-29 09:04:02,220 INFO    MainThread:23784 [wandb_run.py:_footer_history_summary_info():3920] rendering history
+2024-03-29 09:04:02,221 INFO    MainThread:23784 [wandb_run.py:_footer_history_summary_info():3952] rendering summary
+2024-03-29 09:04:02,221 INFO    MainThread:23784 [wandb_run.py:_footer_sync_info():3879] logging synced files
+2024-03-29 09:04:02,222 DEBUG   HandlerThread:23784 [handler.py:handle_request():146] handle_request: shutdown
+2024-03-29 09:04:02,222 INFO    HandlerThread:23784 [handler.py:finish():866] shutting down handler
+2024-03-29 09:04:03,096 INFO    WriterThread:23784 [datastore.py:close():296] close: D:\research\projects\OpenMedLongTailed\wandb\run-20240329_090345-av1vxabo\run-av1vxabo.wandb
+2024-03-29 09:04:03,221 INFO    SenderThread:23784 [sender.py:finish():1546] shutting down sender
+2024-03-29 09:04:03,221 INFO    SenderThread:23784 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-29 09:04:03,221 INFO    SenderThread:23784 [file_pusher.py:join():178] waiting for file pusher

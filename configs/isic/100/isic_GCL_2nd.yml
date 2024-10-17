@@ -1,0 +1,45 @@
+general: 
+  img_size: 224
+  seed: 1
+  num_classes: 8
+  dataset_name: 'isic'
+  method: 'GCL_2nd'
+  num_workers: 16
+  train_epochs: 50
+
+model:
+  if_resume: True
+  resume_path: './outputs/isic/100_GCL_224_resnet50_True_256_1_50/best.pt'
+  if_freeze_encoder: True
+  model_name: resnet50
+  pretrained: True
+
+cuda:
+  gpu_id: '3'
+  use_gpu: True
+  multi_gpu: False
+
+optimizer:
+  type: Adam
+  learning_rate: 0.0003
+
+datasets:
+  imbalance_ratio: 100
+  sampler: GCL
+  batch_size: 256
+  head: 2
+  medium: 5
+  tail: 8
+  img_path: '/mnt/sda/julie/datasets/isic2019/train/'
+  train:
+    np_path: './numpy/isic/train_100.npy'
+    dict_path: './numpy/isic/dic.npy'
+  val:
+    np_path: './numpy/isic/val_100.npy'
+    dict_path: './numpy/isic/dic.npy'
+  test:
+    np_path: './numpy/isic/test_100.npy'
+    dict_path: './numpy/isic/dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'crop'

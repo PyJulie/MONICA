@@ -1,0 +1,21 @@
+general: 
+  dataset_name: tissuemnist
+  num_classes: 8
+datasets:
+  imbalance_ratio: 10
+  head: 3
+  medium: 5
+  tail: 8
+  img_path: '/mnt/sda/julie/datasets/medmnist/images/tissuemnist_224/'
+  train:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_train.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_dic.npy'
+  val:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_val.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_dic.npy'
+  test:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_test.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/tissuemnist_dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'normal'
