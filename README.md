@@ -9,7 +9,7 @@ We build a unified, well-structured codebase called Medical OpeN-source Long-taI
 ## Installation
 First, clone the repo and cd into the directory:
 ```shell
-git clone [https://github.com/SiyuanYan1/PanDerm](https://github.com/PyJulie/MONICA.git)
+git clone this repo.
 cd MONICA
 ```
 Then create a conda env and install the dependencies:
