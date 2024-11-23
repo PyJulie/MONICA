@@ -31,7 +31,7 @@ conda env create -f MONICA.yml
 | Radiology        | OragnA/C/SMNIST | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Radiology        | CheXpert        | https://stanfordmlgroup.github.io/competitions/chexpert/                               | Apache License |
 | Pathology        | PathMNIST       | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
-| Pathology        | BloodMNIST      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
+| Pathology        | WILDS-Camelyon17 (In-running)      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Hematology       | BloodMNIST      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Histology        | TissueMNIST     | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Gastroenterology | KVASIR          | https://www.kaggle.com/datasets/meetnagadia/kvasir-dataset                             | ODbL 1.0       |
