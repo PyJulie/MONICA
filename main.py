@@ -57,6 +57,8 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
         running_loss = 0
         correct = list(0. for i in range(configs.general.num_classes))
         total = list(0. for i in range(configs.general.num_classes))
+        all_labels = []
+        all_outputs = []
         if configs.general.method == 'RSG':
             if epoch == int(configs.general.train_epochs*4/5):
                 configs.datasets.sampler = 'RSG'
@@ -142,10 +144,13 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
                 l = 1 - ((epoch - 1) / 100 * (configs.general.train_epochs // 100 + 1)) ** 2
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                outputs = model.fc(mixed_feature)
-                labels = [labels, target_RS]
-                train_loss = calculate_loss(configs, outputs, labels, loss_functions['train'], 'train')
-                correct, total = calculate_metrics_single(labels[0], outputs, correct, total)
+                if 'swin' in configs.model.model_name:
+                    outputs = model.classifier.fc(mixed_feature)
+                else:
+                    outputs = model.classifier(mixed_feature)
+                clabels = [labels, target_RS]
+                train_loss = calculate_loss(configs, outputs, clabels, loss_functions['train'], 'train')
+                correct, total = calculate_metrics_single(labels, outputs, correct, total)
             elif configs.general.method == 'RSG':
                 outputs, cesc_loss, total_mv_loss, combine_target= model(inputs, epoch, labels)
                 epoch_info = {'epoch': epoch}
@@ -158,13 +163,15 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
                 train_loss = calculate_loss(configs, outputs, labels, loss_functions['train'], 'train', **epoch_info)
             elif configs.general.method == 'SADE':
                 extra_info = {}
-                outputs = model(inputs)
-                # print(outputs)
-                logits = outputs["logits"]
+                SADE_outputs = model(inputs)
+                outputs = SADE_outputs['output']
+                logits = SADE_outputs["logits"]
                 extra_info.update({"logits": logits.transpose(0, 1)})
-                train_loss = calculate_loss(configs, outputs, labels, loss_functions['train'], 'train', **extra_info)
+                train_loss = calculate_loss(configs, SADE_outputs, labels, loss_functions['train'], 'train', **extra_info)
+                
             else:
                 outputs = model(inputs)
+                # print(outputs.shape, labels.shape)
                 train_loss = calculate_loss(configs, outputs, labels, loss_functions['train'], 'train')
                 correct, total = calculate_metrics_single(labels, outputs, correct, total)
             running_loss += train_loss.data.item()
@@ -178,14 +185,18 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
                 optimizer.second_step(zero_grad=True)
             else:
                 optimizer.step()
+            all_outputs.append(outputs.cpu())
+            all_labels.append(labels.cpu())
         if configs.optimizer.cos_lr:
             scheduler.step()
         train_epoch_loss = running_loss / len(dataloaders['train'])
-        class_acc, accs = calculate_metrics(configs, correct, total)
+        all_outputs = torch.cat(all_outputs, dim=0).detach().numpy() 
+        all_labels = torch.cat(all_labels, dim=0).detach().numpy()    
+        class_acc, accs = calculate_accs(configs, all_outputs, all_labels)
         results = {'epoch': epoch, 'status': 'train', 'loss': train_epoch_loss, 'class_acc': class_acc, 'accuracy': accs}
         # wandb.log({'train_logs': results})
         print(results)
-        log_results(configs, results, epoch)
+        log_results_train(configs, results)
         best_acc, valid_results = eval(dataloaders,model, configs, epoch, loss_functions, best_acc)
 
         if epoch>=0 and 'FlexRS' in configs.general.method:
@@ -207,10 +218,13 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
             m.eval()
     else:
         model.eval()
+    
     with torch.no_grad():
         running_loss = 0
         correct = list(0. for i in range(configs.general.num_classes))
         total = list(0. for i in range(configs.general.num_classes))
+        all_labels = []
+        all_outputs = []
         for data in tqdm.tqdm(dataloaders['val']):
             inputs, labels = data
             if configs.cuda.use_gpu:
@@ -231,13 +245,20 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
                 l = 0.5
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                outputs = model.fc(mixed_feature)
+                if 'swin' in configs.model.model_name:
+                    outputs = model.classifier.fc(mixed_feature)
+                else:
+                    outputs = model.classifier(mixed_feature)
                 val_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
             elif configs.general.method == 'T-Norm':
                 feature_x = model.forward_features(inputs)
                 feature_x = model.forward_head(feature_x, pre_logits=True)
-                weights = model.fc.weight
-                bias = model.fc.bias
+                if 'swin' in configs.model.model_name:
+                    weights = model.classifier.fc.weight
+                    bias = model.classifier.fc.bias
+                else:
+                    weights = model.classifier.weight
+                    bias = model.classifier.bias
                 ws = pnorm(weights, 2)
                 outputs = forward(ws, feature_x)
                 val_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
@@ -265,26 +286,32 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
             else:
                 outputs = model(inputs)
                 val_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
-
+            all_outputs.append(outputs.cpu())
+            all_labels.append(labels.cpu())
             correct, total = calculate_metrics_single(labels, outputs, correct, total)
             running_loss += val_loss.data.item()
 
         val_epoch_loss = running_loss / len(dataloaders['val'])
-        class_acc, accs = calculate_metrics(configs, correct, total)
-        valid_results = {'epoch': epoch, 'status': 'val', 'loss': val_epoch_loss, 'class_acc': class_acc, 'accuracy': accs}
+        valid_results = calculate_metrics(configs, all_outputs, all_labels)
+        valid_results['epoch'] = epoch
+        valid_results['status'] = 'val'
+        valid_results['loss'] = val_epoch_loss
         
         # wandb.log({'val_logs': results})
         print(valid_results)
-        log_results(configs, valid_results, epoch)
-        if accs[3] > best_acc:
-            print('Best acc: %s, current acc: %s. Saving best model...' %(round(best_acc, 4), round(accs[3], 4)))
-            best_acc = accs[3]
+        log_results(configs, valid_results)
+        current_acc = valid_results['class_acc'][3]
+        if  current_acc> best_acc:
+            print('Best acc: %s, current acc: %s. Saving best model...' %(round(best_acc, 4), round(current_acc, 4)))
+            best_acc = current_acc
             torch.save(model, 'outputs/%s/%s/best.pt' %(configs.general.dataset_name, configs.general.save_name))
         
     with torch.no_grad():
         running_loss = 0
         correct = list(0. for i in range(configs.general.num_classes))
         total = list(0. for i in range(configs.general.num_classes))
+        all_labels = []
+        all_outputs = []
         for data in tqdm.tqdm(dataloaders['test']):
             inputs, labels = data
             if configs.cuda.use_gpu:
@@ -305,13 +332,20 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
                 l = 0.5
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                outputs = model.fc(mixed_feature)
+                if 'swin' in configs.model.model_name:
+                    outputs = model.classifier.fc(mixed_feature)
+                else:
+                    outputs = model.classifier(mixed_feature)
                 test_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
             elif configs.general.method == 'T-Norm':
                 feature_x = model.forward_features(inputs)
                 feature_x = model.forward_head(feature_x, pre_logits=True)
-                weights = model.fc.weight
-                bias = model.fc.bias
+                if 'swin' in configs.model.model_name:
+                    weights = model.classifier.fc.weight
+                    bias = model.classifier.fc.bias
+                else:
+                    weights = model.classifier.weight
+                    bias = model.classifier.bias
                 ws = pnorm(weights, 2)
                 outputs = forward(ws, feature_x)
                 test_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
@@ -339,15 +373,20 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
             else:
                 outputs = model(inputs)
                 test_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
+            all_outputs.append(outputs.cpu())
+            all_labels.append(labels.cpu())
             correct, total = calculate_metrics_single(labels, outputs, correct, total)
             running_loss += test_loss.data.item()
 
         test_epoch_loss = running_loss / len(dataloaders['test'])
-        class_acc, accs = calculate_metrics(configs, correct, total)
-        test_results = {'epoch': epoch, 'status': 'test', 'loss': test_epoch_loss, 'class_acc': class_acc, 'accuracy': accs}
-        # wandb.log({'test_logs': results})
+        test_results = calculate_metrics(configs, all_outputs, all_labels)
+        test_results['epoch'] = epoch
+        test_results['status'] = 'test'
+        test_results['loss'] = test_epoch_loss
+        
+        # wandb.log({'val_logs': results})
         print(test_results)
-        log_results(configs, test_results, epoch)
+        log_results(configs, test_results)
     return best_acc, valid_results
 
 if __name__ == '__main__':
