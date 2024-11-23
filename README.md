@@ -116,7 +116,7 @@ model:
 
 datasets:
   sampler: GCL # Sampler strategy.
-  img_path: '/mnt/sda/julie/datasets/isic2019/train/' # The image will be loaded as `img_path + name stored in np_path'. So if you can leave this blank if the full path is stored in 'np_path'.
+  img_path: '/mnt/sda/datasets/isic2019/train/' # The image will be loaded as `img_path + name stored in np_path'. So if you can leave this blank if the full path is stored in 'np_path'.
   train:
     np_path: './numpy/isic/train_100.npy'
     dict_path: './numpy/isic/dic.npy' # Make sure this is consistency to the keys stored in the dic files.
