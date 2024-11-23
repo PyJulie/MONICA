@@ -1,7 +1,6 @@
 # MONICA
 MONICA: Benchmarking on Long-tailed Medical Image Classification
-[[`Arxiv Paper`](https://arxiv.org/abs/2410.02010)]
-[[`Cite`](#citation)]
+
 ## Introduction
 We build a unified, well-structured codebase called Medical OpeN-source Long-taIled ClassifiCAtion (MONICA), which implements over 30 methods developed in long-tailed Learning and evaluated on
 12 long-tailed medical datasets covering 6 medical domains.
@@ -183,12 +182,4 @@ python main.py --config ./configs/isic/100/isic_ERM.yml
 
 For MedMNIST Training, please find the `./train.sh` script for reference.
 
-## Citation
-```bibtex
-@article{ju2024monica,
-  title={MONICA: Benchmarking on Long-tailed Medical Image Classification},
-  author={Ju, Lie and Yan, Siyuan and Zhou, Yukun and Nan, Yang and Xing, Xiaodan and Duan, Peibo and Ge, Zongyuan},
-  journal={arXiv preprint arXiv:2410.02010},
-  year={2024}
-}
-```
+
