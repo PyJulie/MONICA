@@ -2,7 +2,7 @@
 MONICA: Benchmarking on Long-tailed Medical Image Classification
 
 ## Introduction
-We build a unified, well-structured codebase called Medical OpeN-source Long-taIled ClassifiCAtion (MONICA), which implements over 30 methods developed in long-tailed Learning and evaluated on
+We build a unified codebase called Medical OpeN-source Long-taIled ClassifiCAtion (MONICA), which implements over 30 methods developed in long-tailed Learning and evaluated on
 12 long-tailed medical datasets covering 6 medical domains.
 ![alt text](fig.png)
 
