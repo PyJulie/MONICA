@@ -164,6 +164,14 @@ datasets:
 | SAM                    | Sharpness-aware minimization for efficiently improving generalization                      |            |                      |
 | BBN                    | Bbn: Bilateral-branch network with cumulative learning for long-tailed visual recognition  |            |                      |
 
+| Methods                | Paper                                                                                      | Link (TBD) | Offical Codes (TBD)  |
+|------------------------|--------------------------------------------------------------------------------------------|------------|----------------------|
+| BYOL                   | Bootstrap your own latent-a new approach to self-supervised learning                       |            |                      |
+| MOCOv2                 | Improved baselines with momentum contrastive learning                                      |            |                      |
+| MAE (RetFound)         | RETFound: a foundation model for generalizable disease detection from retinal image        |            |                      |
+| CAEv2 (PanDerm)        | A General-Purpose Multimodal Foundation Model for Dermatology                              |            |                      |
+| DINOv2 (TBD)           | Dinov2: Learning robust visual features without supervision                                |            |                      |
+
 ### Support Backbones
 | Backbones        | Paper                                                                                |
 |------------------|--------------------------------------------------------------------------------------|
