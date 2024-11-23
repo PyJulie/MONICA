@@ -413,15 +413,6 @@ if __name__ == '__main__':
         [os.remove(os.path.join(outputs_dir, file_name)) for file_name in os.listdir(outputs_dir)]
     if not os.path.exists(outputs_dir):
         os.makedirs(outputs_dir)
-    # wandb.login()
 
-    # run = wandb.init(
-    #     # 此处设置你的项目名
-    #     project="Long-tailed ISIC RS",
-    #     # 此处配置需要Wandb帮你记录和track的参数
-    #     config={
-    #         "imbalance ratio": 100,
-    #         "method": configs.general.method
-    #     })
     main(configs)
     
