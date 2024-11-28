@@ -28,12 +28,12 @@ conda env create -f MONICA.yml
 | Dermatology      | DermaMNIST      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Ophthalmology    | ODIR            | https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k            | not specified  |
 | Ophthalmology    | RFMiD           | https://ieee-dataport.org/open-access/retinal-fundus-multi-disease-image-dataset-rfmid | CC BY-NC 4.0   |
-| Radiology        | OragnA/C/SMNIST | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
+| Radiology        | OragnA/C/SMNIST | https://medmnist.com/                                                                  | CC BY 4.0   |
 | Radiology        | CheXpert        | https://stanfordmlgroup.github.io/competitions/chexpert/                               | [Stanford University Dataset Research Use Agreement](https://stanfordaimi.azurewebsites.net/datasets/8cbd9ed4-2eb9-4565-affc-111cf4f7ebe2) |
-| Pathology        | PathMNIST       | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
+| Pathology        | PathMNIST       | https://medmnist.com/                                                                  | CC BY 4.0   |
 | Pathology        | WILDS-Camelyon17 (In Progress)      | https://wilds.stanford.edu/datasets/                                                                  | CC0 1.0   |
-| Hematology       | BloodMNIST      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
-| Histology        | TissueMNIST     | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
+| Hematology       | BloodMNIST      | https://medmnist.com/                                                                  | CC BY 4.0   |
+| Histology        | TissueMNIST     | https://medmnist.com/                                                                  | CC BY 4.0   |
 | Gastroenterology | KVASIR          | https://www.kaggle.com/datasets/meetnagadia/kvasir-dataset                             | ODbL 1.0       |
 
 Please follow the same license as the original datasets.
