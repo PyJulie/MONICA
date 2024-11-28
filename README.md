@@ -29,9 +29,9 @@ conda env create -f MONICA.yml
 | Ophthalmology    | ODIR            | https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k            | not specified  |
 | Ophthalmology    | RFMiD           | https://ieee-dataport.org/open-access/retinal-fundus-multi-disease-image-dataset-rfmid | CC BY-NC 4.0   |
 | Radiology        | OragnA/C/SMNIST | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
-| Radiology        | CheXpert        | https://stanfordmlgroup.github.io/competitions/chexpert/                               | Apache License |
+| Radiology        | CheXpert        | https://stanfordmlgroup.github.io/competitions/chexpert/                               | not specified |
 | Pathology        | PathMNIST       | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
-| Pathology        | WILDS-Camelyon17 (In Progress)      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
+| Pathology        | WILDS-Camelyon17 (In Progress)      | https://wilds.stanford.edu/datasets/                                                                  | CC0 1.0   |
 | Hematology       | BloodMNIST      | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Histology        | TissueMNIST     | https://medmnist.com/                                                                  | CC BY-NC 4.0   |
 | Gastroenterology | KVASIR          | https://www.kaggle.com/datasets/meetnagadia/kvasir-dataset                             | ODbL 1.0       |
