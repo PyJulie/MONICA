@@ -191,4 +191,12 @@ python main.py --config ./configs/isic/100/isic_ERM.yml
 
 For MedMNIST Training, please find the `./train.sh` script for reference.
 
+## Disclaimer
+
+This repository is provided for research purposes only. The datasets used in this project are either publicly available under their respective licenses or referenced from external sources. Redistribution of data files included in this repository is not permitted unless explicitly allowed by the original dataset licenses.
+
+### Data Usage
+Please ensure that you comply with the licensing terms of the datasets before using them. The authors are not responsible for any misuse of the data. If you are using any dataset provided or linked in this repository, it is your responsibility to adhere to the license terms provided by the dataset creators.
+
+For questions or concerns, please contact the repository maintainers.
 
