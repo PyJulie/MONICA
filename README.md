@@ -182,6 +182,7 @@ datasets:
 | RetFound         | RETFound: a foundation model for generalizable disease detection from retinal images |
 | PanDerm          | A General-Purpose Multimodal Foundation Model for Dermatology                        |
 
+Noted: If you apply foundation models, please modify the model path and use the backbone of the foundation model as the model name, e.g., ViT for RetFound.
 ### Script Training
 For non-MedMNIST Training, please use command like:
 ```bash
