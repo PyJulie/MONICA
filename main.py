@@ -11,7 +11,7 @@ from PIL import Image
 import tqdm
 import datetime
 import os
-
+import random
 from sampler import get_sampler
 from dataset.get_datasets import get_dataloaders, get_datasets
 from models.get_model import get_model
@@ -37,12 +37,6 @@ def main(configs):
     optimizer = get_optimizer(configs, model)
     
     loss_functions = get_loss_functions(configs, cls_num_list)
-    if configs.general.method == 'KNN':
-        knnclassifier = KNNClassifier(feat_dim=configs.model.feature_dim, num_classes=configs.general.num_classes, feat_type='cl2n', dist_type='l2')
-        features = get_knncentroids(dataloaders, model)
-        knnclassifier.update(features)
-        eval(dataloaders, [model, knnclassifier], configs, 0, loss_functions, 0)
-        return
     train(configs, dataloaders, model, optimizer, loss_functions)
 
 
@@ -53,6 +47,12 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
     if configs.optimizer.cos_lr:
         print("[INFORMATION] Using cosine lr_scheduler")
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, configs.general.train_epochs, eta_min=0.0)
+    if configs.general.method == 'KNN':
+        knnclassifier = KNNClassifier(feat_dim=configs.model.feature_dim, num_classes=configs.general.num_classes, feat_type='cl2n', dist_type='l2')
+        features = get_knncentroids(dataloaders, model)
+        knnclassifier.update(features)
+        eval(dataloaders, [model, knnclassifier], configs, 0, loss_functions, 0)
+        return
     for epoch in range(configs.general.train_epochs):
         running_loss = 0
         correct = list(0. for i in range(configs.general.num_classes))
@@ -144,10 +144,7 @@ def train(configs, dataloaders, model, optimizer, loss_functions):
                 l = 1 - ((epoch - 1) / 100 * (configs.general.train_epochs // 100 + 1)) ** 2
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                if 'swin' in configs.model.model_name:
-                    outputs = model.classifier.fc(mixed_feature)
-                else:
-                    outputs = model.classifier(mixed_feature)
+                outputs = model.classifier(mixed_feature)
                 clabels = [labels, target_RS]
                 train_loss = calculate_loss(configs, outputs, clabels, loss_functions['train'], 'train')
                 correct, total = calculate_metrics_single(labels, outputs, correct, total)
@@ -245,20 +242,14 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
                 l = 0.5
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                if 'swin' in configs.model.model_name:
-                    outputs = model.classifier.fc(mixed_feature)
-                else:
-                    outputs = model.classifier(mixed_feature)
+                outputs = model.classifier(mixed_feature)
                 val_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
             elif configs.general.method == 'T-Norm':
                 feature_x = model.forward_features(inputs)
                 feature_x = model.forward_head(feature_x, pre_logits=True)
-                if 'swin' in configs.model.model_name:
-                    weights = model.classifier.fc.weight
-                    bias = model.classifier.fc.bias
-                else:
-                    weights = model.classifier.weight
-                    bias = model.classifier.bias
+
+                weights = model.classifier.weight
+
                 ws = pnorm(weights, 2)
                 outputs = forward(ws, feature_x)
                 val_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
@@ -300,7 +291,7 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
         # wandb.log({'val_logs': results})
         print(valid_results)
         log_results(configs, valid_results)
-        current_acc = valid_results['class_acc'][3]
+        current_acc = valid_results['accuracy'][3]
         if  current_acc> best_acc:
             print('Best acc: %s, current acc: %s. Saving best model...' %(round(best_acc, 4), round(current_acc, 4)))
             best_acc = current_acc
@@ -332,20 +323,13 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
                 l = 0.5
                 configs.general.l = l
                 mixed_feature = 2 * torch.cat((l * feature_a, (1-l) * feature_b), dim=1)
-                if 'swin' in configs.model.model_name:
-                    outputs = model.classifier.fc(mixed_feature)
-                else:
-                    outputs = model.classifier(mixed_feature)
+ 
+                outputs = model.classifier(mixed_feature)
                 test_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
             elif configs.general.method == 'T-Norm':
                 feature_x = model.forward_features(inputs)
                 feature_x = model.forward_head(feature_x, pre_logits=True)
-                if 'swin' in configs.model.model_name:
-                    weights = model.classifier.fc.weight
-                    bias = model.classifier.fc.bias
-                else:
-                    weights = model.classifier.weight
-                    bias = model.classifier.bias
+                weights = model.classifier.weight
                 ws = pnorm(weights, 2)
                 outputs = forward(ws, feature_x)
                 test_loss = calculate_loss(configs, outputs, labels, loss_functions['val'])
@@ -389,13 +373,24 @@ def eval(dataloaders, model, configs, epoch, loss_functions, best_acc):
         log_results(configs, test_results)
     return best_acc, valid_results
 
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.use_deterministic_algorithms(True)
+
 if __name__ == '__main__':
     
     configs = setup_config()
-    torch.manual_seed(configs.general.seed)
-    np.random.seed(configs.general.seed)
-    print(configs)
     os.environ['CUDA_VISIBLE_DEVICES'] = configs.cuda.gpu_id
+    os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+    set_seed(configs.general.seed)
+    print(configs)
+    
     save_name =  current_time = '%s_%s_%s_%s_%s_%s_%s_%s_%s' %(
                                                 configs.datasets.imbalance_ratio, 
                                                 configs.general.method, 
@@ -413,6 +408,15 @@ if __name__ == '__main__':
         [os.remove(os.path.join(outputs_dir, file_name)) for file_name in os.listdir(outputs_dir)]
     if not os.path.exists(outputs_dir):
         os.makedirs(outputs_dir)
+    # wandb.login()
 
+    # run = wandb.init(
+    #     # 此处设置你的项目名
+    #     project="Long-tailed ISIC RS",
+    #     # 此处配置需要Wandb帮你记录和track的参数
+    #     config={
+    #         "imbalance ratio": 100,
+    #         "method": configs.general.method
+    #     })
     main(configs)
     
