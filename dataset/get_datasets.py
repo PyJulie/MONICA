@@ -3,18 +3,19 @@ from torchvision import transforms
 from sampler import get_sampler
 import torch
 from randaugment.randaugment import RandAugment
+import numpy as np
 def get_dataloaders(datasets, configs):
     # datasets = get_datasets(configs)
     dataloaders = {}
     sampler, shuffle = get_sampler.get_sampler(configs, datasets)
-
-    dataloaders['train'] = torch.utils.data.DataLoader(datasets['train'], batch_size=configs.datasets.batch_size, shuffle=shuffle, num_workers=configs.general.num_workers, sampler = sampler)
-    dataloaders['val'] = torch.utils.data.DataLoader(datasets['val'], batch_size=configs.datasets.batch_size, shuffle=False, num_workers=configs.general.num_workers)
-    dataloaders['test'] = torch.utils.data.DataLoader(datasets['test'], batch_size=configs.datasets.batch_size, shuffle=False, num_workers=configs.general.num_workers)
+    seed = configs.general.seed
+    dataloaders['train'] = torch.utils.data.DataLoader(datasets['train'], batch_size=configs.datasets.batch_size, shuffle=shuffle, num_workers=configs.general.num_workers, sampler = sampler, worker_init_fn=lambda worker_id: np.random.seed(seed + worker_id))
+    dataloaders['val'] = torch.utils.data.DataLoader(datasets['val'], batch_size=configs.datasets.batch_size, shuffle=False, num_workers=configs.general.num_workers, worker_init_fn=lambda worker_id: np.random.seed(seed + worker_id))
+    dataloaders['test'] = torch.utils.data.DataLoader(datasets['test'], batch_size=configs.datasets.batch_size, shuffle=False, num_workers=configs.general.num_workers, worker_init_fn=lambda worker_id: np.random.seed(seed + worker_id))
     if configs.general.method == 'BBN':
         configs.datasets.sampler = 'RS'
         sampler, shuffle = get_sampler.get_sampler(configs, datasets)
-        dataloaders['RS_train'] =  torch.utils.data.DataLoader(datasets['train'], batch_size=configs.datasets.batch_size, shuffle=shuffle, num_workers=configs.general.num_workers, sampler = sampler)
+        dataloaders['RS_train'] =  torch.utils.data.DataLoader(datasets['train'], batch_size=configs.datasets.batch_size, shuffle=shuffle, num_workers=configs.general.num_workers, sampler = sampler, worker_init_fn=lambda worker_id: np.random.seed(seed + worker_id))
     return dataloaders
         
 
