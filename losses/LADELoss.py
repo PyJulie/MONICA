@@ -11,13 +11,15 @@ class LADELoss(nn.Module):
     def __init__(self, configs, cls_num_list, remine_lambda=0.1):
         super().__init__()
 
-        self.prior = None
+        
         self.num_classes = configs.general.num_classes
         self.img_num_per_cls = torch.Tensor(cls_num_list)
+        self.prior = self.img_num_per_cls / self.img_num_per_cls.sum()
         self.balanced_prior = torch.tensor(1. / self.num_classes).float()
         self.remine_lambda = remine_lambda
         self.cls_weight = (self.img_num_per_cls.float() / torch.sum(self.img_num_per_cls.float()))
-        if configs.cuda.use_cuda:
+        if configs.cuda.use_gpu:
+            self.prior = self.prior.cuda()
             self.img_num_per_cls = self.img_num_per_cls.cuda()
             self.balanced_prior = self.balanced_prior.cuda()
             self.cls_weight = self.cls_weight.cuda()
@@ -53,16 +55,15 @@ def create_loss(configs, cls_num_list, remine_lambda=0.1):
     return LADELoss(
         configs=configs, 
         cls_num_list=cls_num_list,
-        remine_lambda=remine_lambda,
     )
 
 class UnifiedLoss(nn.Module):
-    def __init__(self, configs, cls_num_list, remine_lambda=0.1):
+    def __init__(self, configs, cls_num_list):
         super().__init__()
         self.priorce_loss = create_priorce_loss(configs, cls_num_list)
         self.lade_loss = create_loss(configs, cls_num_list)
-    def forward(outputs, labels):
+    def forward(self, outputs, labels):
         loss_priorce = self.priorce_loss(outputs, labels)
         loss_lade = self.lade_loss(outputs, labels)
-        loss = loss_priorce + loss_lade
+        loss = loss_priorce + 0.1*loss_lade
         return loss
