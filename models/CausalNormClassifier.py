@@ -6,9 +6,9 @@ import math
 
 class Causal_Norm_Classifier(nn.Module):
 
-    def __init__(self, configs, use_effect=True, num_head=2, tau=16.0, alpha=1.5, gamma=0.03125, *args):
+    def __init__(self, configs, feat_dim, use_effect=True, num_head=2, tau=16.0, alpha=1.5, gamma=0.03125, *args):
         super(Causal_Norm_Classifier, self).__init__()
-        self.feat_dim = configs.model.feat_dim
+        self.feat_dim = feat_dim
         self.weight = nn.Parameter(torch.Tensor(configs.general.num_classes, self.feat_dim).cuda(), requires_grad=True)
         self.scale = tau / num_head   # 16.0 / num_head
         self.norm_scale = gamma       # 1.0 / 32.0
@@ -19,6 +19,7 @@ class Causal_Norm_Classifier(nn.Module):
         self.reset_parameters(self.weight)
         self.embed_mean = torch.zeros(self.feat_dim).numpy()
         self.mu = 0.9
+        
         # self.relu = nn.ReLU(inplace=True)
 
     def reset_parameters(self, weight):

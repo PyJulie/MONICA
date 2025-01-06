@@ -252,3 +252,15 @@ class ResNet(nn.Module):
             }
         else:
             return final_out
+
+def get_SADE_model(configs):
+    if 'resnet' not in configs.model.model_name:
+            print('SADE does not support %s and will apply ResNet instead.' %configs.model.model_name)
+    model = ResNet(Bottleneck, [3, 4, 6, 3], dropout=None, num_classes=configs.general.num_classes, 
+                    reduce_dimension=True, layer3_output_dim=None, 
+                    layer4_output_dim=None, use_norm=True, num_experts=3, returns_feat=True)
+    if configs.cuda.use_gpu:
+        if configs.cuda.multi_gpu:
+            model = nn.DataParallel(model)
+        model = model.cuda()
+    return model

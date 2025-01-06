@@ -3,8 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.nn.init as init
 import numpy as np
-from torch.nn import Parameter
-from torch.autograd import Variable
+
 
 
 class RSG(nn.Module):
@@ -228,3 +227,4 @@ class RSG(nn.Module):
            target = torch.cat((target, target_tail[j * num_head : (j + 1) * num_head]), dim=0)
 
         return feature_maps, loss_cesc, loss_mv_total/segment, target
+

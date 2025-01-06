@@ -1,8 +1,9 @@
 import torch
 import torch.nn as nn
 from .utils import load_state_dict_from_url
-from .RSG import *
-
+from .RSG import RSG
+from torch.nn import Parameter
+import torch.nn.functional as F
 __all__ = ['resnet50', 'resnet152', 'resnext50_32x4d']
 
 
@@ -162,8 +163,7 @@ class ResNet(nn.Module):
            self.head_lists = head_lists
            self.RSG = RSG(n_center = 15, feature_maps_shape = [256*block.expansion, 14, 14], num_classes=num_classes, contrastive_module_dim = 256, head_class_lists = self.head_lists, epoch_thresh = epoch_thresh)
 
-        self.fc_ = NormedLinear(512 *block.expansion, num_classes)
-
+        
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
@@ -224,7 +224,7 @@ class ResNet(nn.Module):
         x = self.layer4(x)
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
-        x = self.fc_(x)
+        x = self.fc(x)
 
         if phase_train:
           return x, cesc_total, loss_mv_total, combine_target
@@ -247,6 +247,8 @@ def _resnet(arch, block, layers, pretrained, progress, num_classes=1000, head_li
         state_dict = {k: v for k, v in state_dict.items() if k in model_dict}
         model_dict.update(state_dict) 
         model.load_state_dict(model_dict)
+    model.fc = NormedLinear(512 *block.expansion, num_classes)
+
 
     return model
 
@@ -262,7 +264,7 @@ def _resnext(arch, block, layers, pretrained, progress, num_classes=1000, head_l
         state_dict = {k: v for k, v in state_dict.items() if k in model_dict}
         model_dict.update(state_dict) 
         model.load_state_dict(model_dict)
-
+    model.fc = NormedLinear(512 *block.expansion, num_classes)
     return model
 
 
@@ -295,3 +297,21 @@ def resnext50_32x4d(pretrained=True, progress=True, num_classes=1000, head_lists
     """
     return _resnext('resnext50_32x4d', Bottleneck, [3, 4, 6, 3],
                    pretrained, progress, num_classes, head_lists, phase_train, epoch_thresh)
+
+def get_RSG_model(configs):
+    if 'resnet' not in configs.model.model_name:
+        print('RSG does not support %s and will apply ResNet instead.' %configs.model.model_name)
+    configs.datasets.ori_cls_num_list = configs.datasets.cls_num_list.copy()
+    cls_num_list = configs.datasets.cls_num_list
+
+    head_lists = []
+    Inf = 0
+    for i in range(configs.datasets.head):
+        head_lists.append(cls_num_list.index(max(cls_num_list)))
+        cls_num_list[cls_num_list.index(max(cls_num_list))]=Inf
+    model = resnext50_32x4d(num_classes=configs.general.num_classes, head_lists=head_lists, phase_train=True, epoch_thresh=160)
+    if configs.cuda.use_gpu:
+        if configs.cuda.multi_gpu:
+            model = nn.DataParallel(model)
+        model = model.cuda()
+    return model
