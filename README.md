@@ -191,6 +191,28 @@ python main.py --config ./configs/isic/100/isic_ERM.yml
 
 For MedMNIST Training, please find the `./train.sh` script for reference.
 
+## Citation
+If you find this code useful, we kindly to request you to cite our paper:
+```
+@article{ju2024monica,
+  title={MONICA: Benchmarking on Long-tailed Medical Image Classification},
+  author={Ju, Lie and Yan, Siyuan and Zhou, Yukun and Nan, Yang and Xing, Xiaodan and Duan, Peibo and Ge, Zongyuan},
+  journal={arXiv preprint arXiv:2410.02010},
+  year={2024}
+}
+```
+
+```
+@inproceedings{ju2022flexible,
+  title={Flexible sampling for long-tailed skin lesion classification},
+  author={Ju, Lie and Wu, Yicheng and Wang, Lin and Yu, Zhen and Zhao, Xin and Wang, Xin and Bonnington, Paul and Ge, Zongyuan},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={462--471},
+  year={2022},
+  organization={Springer}
+}
+```
+
 ## Disclaimer
 
 This repository is provided for research purposes only. The datasets used in this project are either publicly available under their respective licenses or referenced from external sources. Redistribution of data files included in this repository is not permitted unless explicitly allowed by the original dataset licenses.
