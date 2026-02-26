@@ -1,0 +1,45 @@
+general: 
+  img_size: 224
+  seed: 1
+  num_classes: 9
+  dataset_name: 'nct'
+  method: 'GCL'
+  num_workers: 16
+  train_epochs: 50
+
+model:
+  if_resume: False
+  resume_path: ''
+  if_freeze_encoder: False
+  model_name: resnet50
+  pretrained: True
+
+cuda:
+  gpu_id: '3'
+  use_gpu: True
+  multi_gpu: False
+
+optimizer:
+  type: Adam
+  learning_rate: 0.0003
+
+datasets:
+  imbalance_ratio: 500
+  sampler: None
+  batch_size: 256
+  head: 2
+  medium: 5
+  tail: 9
+  img_path: '/mnt/sda/julie/datasets/pathology/NCT-CRC-HE-100K/NCT-CRC-HE-100K/'
+  train:
+    np_path: './numpy/nct/train_500.npy'
+    dict_path: './numpy/nct/dic.npy'
+  val:
+    np_path: './numpy/nct/val_500.npy'
+    dict_path: './numpy/nct/dic.npy'
+  test:
+    np_path: './numpy/nct/test_500.npy'
+    dict_path: './numpy/nct/dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'crop'

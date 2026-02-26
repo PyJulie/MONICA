@@ -1,0 +1,47 @@
+general: 
+  img_size: 224
+  seed: 1
+  num_classes: '@genenral.num_classes'
+  dataset_name: '@genenral.dataset_name'
+  method: 'DisAlign'
+  num_workers: 16
+  train_epochs: 50
+
+model:
+  if_resume: True
+  resume_path: './outputs/isic/100_ERM_224_resnet50_True_256_1_50/best.pt'
+  if_freeze_encoder: True
+  model_name: resnet50
+  pretrained: True
+
+cuda:
+  gpu_id: '3'
+  use_gpu: True
+  multi_gpu: False
+
+optimizer:
+  type: Adam
+  learning_rate: 0.0003
+
+datasets:
+  imbalance_ratio: '@datasets.imbalance_ratio'
+  sampler: None
+  batch_size: 256
+  head: '@datasets.head'
+  medium: '@datasets.medium'
+  tail: '@datasets.tail'
+  img_path: '@datasets.img_path'
+  train:
+    np_path: '@datasets.train.np_path'
+    dict_path: '@datasets.train.dict_path'
+  val:
+    np_path: '@datasets.val.np_path'
+    dict_path: '@datasets.val.dict_path'
+  test:
+    np_path: '@datasets.test.np_path'
+    dict_path: '@datasets.test.dict_path'
+  transforms:
+    train: '@datasets.transforms.train'
+    val_test: '@datasets.transforms.val_test'
+
+

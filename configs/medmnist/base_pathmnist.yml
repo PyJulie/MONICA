@@ -1,0 +1,21 @@
+general: 
+  dataset_name: pathmnist
+  num_classes: 9
+datasets:
+  imbalance_ratio: 10
+  head: 2
+  medium: 5
+  tail: 9
+  img_path: '/mnt/sda/julie/datasets/medmnist/images/pathmnist_224/'
+  train:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_train.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_dic.npy'
+  val:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_val.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_dic.npy'
+  test:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_test.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/pathmnist_dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'normal'

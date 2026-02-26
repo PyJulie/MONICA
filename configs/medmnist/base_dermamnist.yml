@@ -1,0 +1,21 @@
+general: 
+  dataset_name: dermamnist
+  num_classes: 7
+datasets:
+  imbalance_ratio: 10
+  head: 1
+  medium: 5
+  tail: 7
+  img_path: '/mnt/sda/julie/datasets/medmnist/images/dermamnist_224/'
+  train:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_train.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_dic.npy'
+  val:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_val.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_dic.npy'
+  test:
+    np_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_test.npy'
+    dict_path: '/mnt/sda/julie/projects/OpenMedLongTailed/numpy/medmnist/dermamnist_dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'normal'

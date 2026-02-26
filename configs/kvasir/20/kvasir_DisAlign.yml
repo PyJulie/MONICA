@@ -1,0 +1,46 @@
+general: 
+  img_size: 224
+  seed: 1
+  num_classes: 14
+  dataset_name: 'kvasir'
+  method: 'DisAlign'
+  num_workers: 16
+  train_epochs: 50
+
+model:
+  if_resume: True
+  resume_path: './outputs/kvasir/20_ERM_224_resnet50_True_256_1_50/best.pt'
+  if_freeze_encoder: True
+  model_name: resnet50
+  pretrained: True
+
+cuda:
+  gpu_id: '3'
+  use_gpu: True
+  multi_gpu: False
+
+optimizer:
+  type: Adam
+  learning_rate: 0.0003
+
+datasets:
+  imbalance_ratio: 20
+  sampler: None
+  batch_size: 256
+  head: 4
+  medium: 8
+  tail: 14
+  img_path: '/mnt/sda/julie/datasets/gastrointestinal/labeled-images/'
+  train:
+    np_path: './numpy/kvasir/train_20.npy'
+    dict_path: './numpy/kvasir/dic.npy'
+  val:
+    np_path: './numpy/kvasir/val_20.npy'
+    dict_path: './numpy/kvasir/dic.npy'
+  test:
+    np_path: './numpy/kvasir/test_20.npy'
+    dict_path: './numpy/kvasir/dic.npy'
+  transforms:
+    train: 'strong'
+    val_test: 'normal'
+
